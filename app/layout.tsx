@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
 
@@ -30,6 +31,7 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-[var(--color-background)] text-[var(--color-foreground)]">
         <AppProviders>{children}</AppProviders>
+        <SpeedInsights />
       </body>
     </html>
   );
