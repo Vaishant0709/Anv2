@@ -9,6 +9,7 @@ import { DesktopIcons } from "./DesktopIcons";
 import { DesktopWidgets } from "./DesktopWidgets";
 import { Taskbar } from "./Taskbar";
 import { WindowLayer } from "./WindowLayer";
+import { CelebrationLayer } from "@/components/celebration/CelebrationLayer";
 
 const content = validateSiteContent(siteData);
 
@@ -19,6 +20,7 @@ export function Desktop() {
     <main className="relative min-h-screen overflow-hidden">
       <DesktopBackground />
       <DesktopWidgets />
+      <CelebrationLayer />
 
       <div className="relative z-10 flex min-h-screen flex-col justify-between px-6 py-6 sm:px-8 sm:py-8">
         <div className="flex flex-1 items-start">

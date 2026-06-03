@@ -20,7 +20,7 @@ const audioStore = {
     currentTrack: null,
     hasUnlocked: false,
     isPlaying: false,
-  } satisfies AudioStoreState,
+  } as AudioStoreState,
 };
 
 function emitAudioState() {
@@ -107,8 +107,8 @@ export function unlockAudio(track: AudioTrack | null) {
     hasUnlocked: true,
     currentTrack: track,
   };
-
-  void playTrack(track);
+  ensureAudio();
+  emitAudioState();
 }
 
 export function useGlobalAudio() {

@@ -1,7 +1,7 @@
 import type { DesktopIconConfig } from "./apps";
 
 export interface TimelineEntry {
-  date: string;
+  date?: string;
   title: string;
   description: string;
   image: string;
@@ -24,6 +24,12 @@ export interface PinnedNote {
   signature: string;
 }
 
+export interface CelebrationContent {
+  headline: string;
+  message: string;
+  resultLine: string;
+}
+
 export type TerminalSecrets = Record<string, string>;
 
 export interface SiteContent {
@@ -36,4 +42,5 @@ export interface SiteContent {
   terminalSecrets: TerminalSecrets;
   audioTracks: AudioTrack[];
   pinnedNote: PinnedNote;
+  celebration: CelebrationContent;
 }

@@ -1,6 +1,7 @@
 import { APP_IDS, type AppIconName } from "@/types/apps";
 import { logger } from "@/lib/logger";
 import type {
+  CelebrationContent,
   AudioTrack,
   PinnedNote,
   ReasonCardEntry,
@@ -31,6 +32,11 @@ const FALLBACK_CONTENT: SiteContent = {
     body: "Add a little note in siteData to personalize this desktop.",
     signature: "Love",
   },
+  celebration: {
+    headline: "Happy Anniversary Aru",
+    message: "Tap once and let the whole desktop celebrate you.",
+    resultLine: "Aru, you're my favorite forever.",
+  },
 };
 
 function normalizeText(value: string) {
@@ -44,7 +50,7 @@ function isNonEmptyString(value: unknown): value is string {
 function normalizeTimelineEntry(entry: TimelineEntry): TimelineEntry {
   return {
     ...entry,
-    date: normalizeText(entry.date),
+    date: isNonEmptyString(entry.date) ? normalizeText(entry.date) : undefined,
     title: normalizeText(entry.title),
     description: normalizeText(entry.description),
     image: normalizeText(entry.image),
@@ -74,6 +80,14 @@ function normalizePinnedNote(note: PinnedNote): PinnedNote {
   };
 }
 
+function normalizeCelebrationContent(content: CelebrationContent): CelebrationContent {
+  return {
+    headline: normalizeText(content.headline),
+    message: normalizeText(content.message),
+    resultLine: normalizeText(content.resultLine),
+  };
+}
+
 function getTimeValue(date: string) {
   const parsed = Date.parse(date);
   return Number.isNaN(parsed) ? Number.NEGATIVE_INFINITY : parsed;
@@ -81,7 +95,7 @@ function getTimeValue(date: string) {
 
 export function sortTimelineEntries(entries: TimelineEntry[]) {
   return [...entries].sort((left, right) => {
-    return getTimeValue(left.date) - getTimeValue(right.date);
+    return getTimeValue(left.date ?? "") - getTimeValue(right.date ?? "");
   });
 }
 
@@ -111,7 +125,6 @@ export function normalizeSiteContent(content: SiteContent): SiteContent {
       content.timeline
         .filter((entry) => {
           const isValid =
-            isNonEmptyString(entry.date) &&
             isNonEmptyString(entry.title) &&
             isNonEmptyString(entry.description) &&
             isNonEmptyString(entry.image);
@@ -176,6 +189,15 @@ export function normalizeSiteContent(content: SiteContent): SiteContent {
             logger.warn("[content] invalid pinned note, using fallback");
             return FALLBACK_CONTENT.pinnedNote;
           })(),
+    celebration:
+      isNonEmptyString(content.celebration.headline) &&
+      isNonEmptyString(content.celebration.message) &&
+      isNonEmptyString(content.celebration.resultLine)
+        ? normalizeCelebrationContent(content.celebration)
+        : (() => {
+            logger.warn("[content] invalid celebration content, using fallback");
+            return FALLBACK_CONTENT.celebration;
+          })(),
   };
 }
 
@@ -211,5 +233,9 @@ export function validateSiteContent(content: Partial<SiteContent> | undefined): 
       content.pinnedNote && typeof content.pinnedNote === "object"
         ? content.pinnedNote
         : FALLBACK_CONTENT.pinnedNote,
+    celebration:
+      content.celebration && typeof content.celebration === "object"
+        ? content.celebration
+        : FALLBACK_CONTENT.celebration,
   });
 }

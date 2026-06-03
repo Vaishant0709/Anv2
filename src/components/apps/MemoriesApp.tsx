@@ -21,7 +21,7 @@ export function MemoriesApp() {
   return (
     <section className="space-y-6">
       <AppWindowHeader
-        description="This timeline is fully driven by `siteData`, so every date, caption, and photo can be personalized without touching the app UI."
+        description="A stitched-together timeline of the moments that still glow brightest."
         eyebrow="Memories.exe"
         title="A timeline stitched from the days that still glow."
       />

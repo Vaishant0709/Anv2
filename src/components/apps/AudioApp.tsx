@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Pause, Play, Volume2 } from "lucide-react";
 
 import { AppWindowHeader } from "@/components/ui/AppWindowHeader";
@@ -15,7 +15,11 @@ import { useGlobalAudio } from "@/hooks/useGlobalAudio";
 const content = validateSiteContent(siteData);
 
 export function AudioApp() {
-  const primaryTrack = content.audioTracks[0] ?? null;
+  const [selectedTrackId, setSelectedTrackId] = useState(content.audioTracks[0]?.id ?? null);
+  const selectedTrack = useMemo(
+    () => content.audioTracks.find((track) => track.id === selectedTrackId) ?? content.audioTracks[0] ?? null,
+    [selectedTrackId],
+  );
   const { currentTrack, hasUnlocked, isPlaying, toggle } = useGlobalAudio();
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -59,28 +63,59 @@ export function AudioApp() {
 
           <div className="mt-5 space-y-3">
             <p className="text-2xl font-semibold text-[var(--color-foreground)]">
-              {currentTrack?.title ?? primaryTrack?.title ?? "Add an audio track"}
+              {selectedTrack?.title ?? "Add an audio track"}
             </p>
-            <p className="text-sm leading-7 text-[color:rgba(244,235,208,0.72)]">
-              {!primaryTrack
-                ? "No audio track is configured yet. Add an MP3 path in siteData to enable playback."
-                : hasUnlocked
-                ? "Audio is unlocked and can keep playing across the desktop."
-                : "Audio unlocks after the password gate interaction, following browser autoplay rules."}
+            
+          </div>
+
+          <div className="mt-7 space-y-3">
+            <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-accent-soft)]">
+              Tracks
             </p>
+            <div className="space-y-2">
+              {content.audioTracks.map((track) => {
+                const isSelected = track.id === selectedTrack?.id;
+
+                return (
+                  <button
+                    key={track.id}
+                    className={`flex w-full items-center justify-between rounded-[20px] border px-4 py-3 text-left transition ${
+                      isSelected
+                        ? "border-[rgba(245,185,113,0.28)] bg-[rgba(245,185,113,0.12)]"
+                        : "border-white/10 bg-white/5 hover:bg-white/8"
+                    }`}
+                    onClick={() => {
+                      setSelectedTrackId(track.id);
+                    }}
+                    type="button"
+                  >
+                    <span className="text-sm font-medium text-[var(--color-foreground)]">
+                      {track.title}
+                    </span>
+                    <span className="text-xs uppercase tracking-[0.22em] text-[color:rgba(244,235,208,0.56)]">
+                      {isSelected ? "Selected" : "Choose"}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           <Button
             className="mt-8 gap-3"
-            disabled={!primaryTrack}
+            disabled={!selectedTrack}
             onClick={() => {
-              if (primaryTrack) {
-                toggle(primaryTrack);
+              if (selectedTrack) {
+                toggle(selectedTrack);
               }
             }}
           >
-            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-            {isPlaying ? "Pause" : "Play"}
+            {isPlaying && currentTrack?.id === selectedTrack?.id ? (
+              <Pause className="h-4 w-4" />
+            ) : (
+              <Play className="h-4 w-4" />
+            )}
+            {isPlaying && currentTrack?.id === selectedTrack?.id ? "Pause" : "Play"}
           </Button>
         </Panel>
       </div>

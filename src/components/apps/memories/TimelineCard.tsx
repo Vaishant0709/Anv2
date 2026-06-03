@@ -22,19 +22,19 @@ export function TimelineCard({ entry, index }: TimelineCardProps) {
       viewport={{ once: true, amount: 0.2 }}
       whileInView={{ opacity: 1, y: 0 }}
     >
-      <div className="grid gap-0 md:grid-cols-[0.95fr_1.05fr]">
-        <div className="relative min-h-64 bg-[linear-gradient(180deg,rgba(245,185,113,0.2),rgba(12,23,48,0.18))]">
+      <div className="grid gap-0 md:grid-cols-[1.15fr_0.85fr]">
+        <div className="relative min-h-80 bg-[linear-gradient(180deg,rgba(245,185,113,0.2),rgba(12,23,48,0.18))]">
           {imageFailed ? (
-            <div className="flex h-full min-h-64 items-center justify-center p-6 text-center text-sm text-[color:rgba(244,235,208,0.58)]">
+            <div className="flex h-full min-h-80 items-center justify-center p-6 text-center text-sm text-[color:rgba(244,235,208,0.58)]">
               Add a photo at <span className="mx-1 font-mono">{entry.image}</span> to complete this memory.
             </div>
           ) : (
             <Image
               alt={entry.title}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
               fill
               onError={() => setImageFailed(true)}
-              sizes="(max-width: 768px) 100vw, 40vw"
+              sizes="(max-width: 768px) 100vw, 52vw"
               src={entry.image}
             />
           )}
@@ -44,9 +44,11 @@ export function TimelineCard({ entry, index }: TimelineCardProps) {
 
         <div className="flex flex-col justify-between gap-6 p-6 sm:p-7">
           <div className="space-y-3">
-            <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-accent-soft)]">
-              {entry.date}
-            </p>
+            {entry.date ? (
+              <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-accent-soft)]">
+                {entry.date}
+              </p>
+            ) : null}
             <h3 className="text-2xl font-semibold tracking-tight text-[var(--color-foreground)]">
               {entry.title}
             </h3>

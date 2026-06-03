@@ -12,9 +12,9 @@ interface MemoryOfTheDayWidgetProps {
 export function MemoryOfTheDayWidget({ memory }: MemoryOfTheDayWidgetProps) {
   if (!memory) {
     return (
-      <Panel className="max-w-md p-6" tone="soft">
+      <Panel className="w-[34rem] max-w-none p-8" tone="soft">
         <p className="text-xs uppercase tracking-[0.28em] text-[var(--color-accent)]">
-          Memory Of The Day
+          Those Eyes pull me in every time.
         </p>
         <p className="mt-4 text-sm leading-7 text-[color:rgba(244,235,208,0.72)]">
           Add a memory entry in `siteData.timeline` to fill this little polaroid.
@@ -24,26 +24,23 @@ export function MemoryOfTheDayWidget({ memory }: MemoryOfTheDayWidgetProps) {
   }
 
   return (
-    <div className="w-full max-w-md rotate-[2deg] rounded-[30px] bg-[#f6f0e7] p-5 text-slate-900 shadow-[0_34px_70px_rgba(0,0,0,0.28)]">
-      <div className="relative h-72 overflow-hidden rounded-[22px] bg-slate-200">
+    <div className="w-[34rem] max-w-none rotate-[2deg] rounded-[30px] bg-[#f6f0e7] p-5 text-slate-900 shadow-[0_34px_70px_rgba(0,0,0,0.28)] xl:w-[36rem]">
+      <div className="relative h-[21rem] overflow-hidden rounded-[22px] bg-slate-200">
         <Image
           alt={memory.title}
           className="h-full w-full object-cover"
           fill
-          sizes="(max-width: 768px) 100vw, 384px"
-          src={memory.image}
+          sizes="(max-width: 768px) 100vw, 576px"
+          src="/images/IMG-20250902-WA0025.jpg"
         />
       </div>
       <div className="space-y-3 px-2 pb-2 pt-5">
         <p className="text-[11px] uppercase tracking-[0.24em] text-slate-500">
-          Memory Of The Day
+          Those Eyes pull me in every time.
         </p>
-        <h3 className="text-2xl font-semibold tracking-tight text-slate-900">
-          {memory.title}
-        </h3>
-        <p className="text-[15px] leading-7 text-slate-700">{memory.description}</p>
+        <p className="text-[15px] leading-7 text-slate-700">Your beautiful brown eyes remind of me Amber and Onyx . Of Whiskey , honey and caramel. You are my sweet intoxication and my warm comfort, all in one. I could get lost in them forever and never want to be found.</p>
         <p className="pt-2 text-xs uppercase tracking-[0.18em] text-slate-500">
-          {memory.date}
+          Sept 6 , 2025
         </p>
       </div>
     </div>

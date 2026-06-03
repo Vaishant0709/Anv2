@@ -21,7 +21,7 @@ export const appRegistry: Record<AppId, AppRegistryEntry> = {
     id: "memories",
     title: "Memories.exe",
     icon: "FolderHeart",
-    defaultSize: { width: 760, height: 520 },
+    defaultSize: { width: 960, height: 680 },
     render: () => <MemoriesApp />,
   },
   reasons: {

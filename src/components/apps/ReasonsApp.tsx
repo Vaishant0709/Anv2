@@ -39,7 +39,7 @@ export function ReasonsApp() {
   return (
     <section className="space-y-6">
       <AppWindowHeader
-        description="Every card comes from `siteData.reasons`, so this space stays easy to personalize while feeling a little playful and alive."
+        description="A drifting little field of reasons, each one ready to be pulled closer."
         eyebrow="Reasons.app"
         title="Little notes that still don't fully cover it."
       />
@@ -68,10 +68,6 @@ export function ReasonsApp() {
             </p>
             <p className="text-2xl font-semibold leading-9 text-[var(--color-foreground)]">
               {activeReason?.text ?? "Add a reason in siteData to see it here."}
-            </p>
-            <p className="text-sm leading-7 text-[color:rgba(244,235,208,0.7)]">
-              Hover or drag a card to bring it into focus. The layout offsets are generated in a
-              small helper so the component stays presentation-first.
             </p>
           </div>
         </Panel>

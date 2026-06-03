@@ -48,7 +48,7 @@ export function useWindowDrag({
     drag: !isMobile,
     dragMomentum: false,
     dragListener: !isMobile,
-    dragConstraints: false,
+    dragConstraints: false as const,
     onDragStart: handleDragStart,
     onDragEnd: handleDragEnd,
   };

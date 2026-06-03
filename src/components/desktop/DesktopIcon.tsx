@@ -31,7 +31,7 @@ export function DesktopIcon({ icon, onOpen }: DesktopIconProps) {
     <button
       aria-label={`Open ${icon.label}`}
       className={cn(
-        "group flex w-24 flex-col items-center gap-3 rounded-3xl border border-transparent px-3 py-4 text-center transition",
+        "group flex w-24 select-none flex-col items-center gap-3 rounded-3xl border border-transparent px-3 py-4 text-center transition",
         "hover:border-white/10 hover:bg-white/8 focus:border-[var(--color-accent)] focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-[rgba(245,185,113,0.18)]",
       )}
       onDoubleClick={handleActivate}

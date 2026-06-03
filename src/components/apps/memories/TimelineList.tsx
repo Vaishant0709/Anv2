@@ -16,7 +16,7 @@ export function TimelineList({ entries }: TimelineListProps) {
 
       <div className="space-y-6">
         {entries.map((entry, index) => (
-          <div key={`${entry.date}-${entry.title}`} className="relative pl-10 sm:pl-12">
+          <div key={`${entry.date ?? "undated"}-${entry.title}`} className="relative pl-10 sm:pl-12">
             <div className="absolute left-0 top-8 flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(245,185,113,0.35)] bg-[rgba(10,18,32,0.92)] text-xs font-semibold text-[var(--color-accent)] shadow-[0_10px_22px_rgba(0,0,0,0.22)]">
               {index + 1}
             </div>

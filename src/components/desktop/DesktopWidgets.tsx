@@ -31,19 +31,19 @@ export function DesktopWidgets() {
       <div className="relative h-full w-full">
         <motion.div
           aria-hidden="true"
-          className="absolute right-[14%] top-[12%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(245,185,113,0.2),transparent_62%)] blur-3xl"
+          className="absolute right-[11%] top-[10%] h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,rgba(245,185,113,0.2),transparent_62%)] blur-3xl"
           transition={{ duration: 0.7, ease: "easeOut" }}
           variants={fadeInUp}
         />
         <motion.div
           aria-hidden="true"
-          className="absolute right-[10%] top-[24%] h-[26rem] w-[26rem] rounded-full bg-[radial-gradient(circle,rgba(131,197,190,0.18),transparent_62%)] blur-3xl"
+          className="absolute right-[9%] top-[22%] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(131,197,190,0.18),transparent_62%)] blur-3xl"
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.06 }}
           variants={fadeInUp}
         />
 
         <motion.div
-          className="pointer-events-auto absolute right-[14%] top-[14%]"
+          className="pointer-events-auto absolute right-[1%] top-[11%] origin-top-right scale-[0.96]"
           transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
           variants={fadeInUp}
         >
@@ -51,7 +51,7 @@ export function DesktopWidgets() {
         </motion.div>
 
         <motion.div
-          className="pointer-events-auto absolute bottom-36 right-[9%]"
+          className="pointer-events-auto absolute bottom-28 right-[8%] origin-bottom-right scale-[0.92]"
           transition={{ duration: 0.45, ease: "easeOut", delay: 0.18 }}
           variants={fadeInUp}
         >

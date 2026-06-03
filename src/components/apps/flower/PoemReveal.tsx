@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 
+import { formatFlowerPoem } from "@/lib/flower";
+
 interface PoemRevealProps {
   allPlucked: boolean;
   poem: string | null;
@@ -24,7 +26,17 @@ export function PoemReveal({ allPlucked, poem }: PoemRevealProps) {
           {allPlucked ? "Every Petal Opened" : "Current Promise"}
         </p>
         <p className="text-2xl font-semibold leading-9 text-[var(--color-foreground)]">
-          {poem ?? "Click a petal to reveal a little note waiting underneath it."}
+          {poem ? (
+            <span className="space-y-4">
+              {formatFlowerPoem(poem).map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </span>
+          ) : (
+            "Click a petal to reveal a little note waiting underneath it."
+          )}
         </p>
         <p className="text-sm leading-7 text-[color:rgba(244,235,208,0.72)]">
           {allPlucked

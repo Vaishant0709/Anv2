@@ -8,6 +8,7 @@ import { siteData } from "@/data/siteData";
 import {
   areAllPetalsPlucked,
   createFlowerPetals,
+  getInitialRevealedPoem,
   getNextRevealedPoem,
   pluckFlowerPetal,
 } from "@/lib/flower";
@@ -22,7 +23,9 @@ const content = validateSiteContent(siteData);
 export function FlowerApp() {
   const initialPetals = useMemo(() => createFlowerPetals(content.flowerPoems), []);
   const [petals, setPetals] = useState(initialPetals);
-  const [revealedPoem, setRevealedPoem] = useState<string | null>(initialPetals[0]?.poem ?? null);
+  const [revealedPoem, setRevealedPoem] = useState<string | null>(
+    getInitialRevealedPoem(initialPetals),
+  );
 
   useEffect(() => {
     logger.info("[flower] app opened", {
@@ -63,7 +66,7 @@ export function FlowerApp() {
   return (
     <section className="space-y-6">
       <AppWindowHeader
-        description="Click each petal to pull it away and uncover a note from `siteData.flowerPoems`."
+        description="Click each petal to pull it away and uncover a note."
         eyebrow="Flower.sh"
         title="A flower made of tiny promises."
       />

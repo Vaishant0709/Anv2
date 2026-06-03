@@ -964,6 +964,116 @@ Quality checks:
 Logs:
 - No direct logs needed.
 
+### Phase 18: Anniversary Celebration
+
+#### Step 63: Celebration content and state
+
+Responsibility:
+Copy and interaction state for the anniversary centerpiece only.
+
+Files:
+- `src/types/content.ts`
+- `src/data/siteData.ts`
+- `src/lib/content.ts`
+
+Work:
+- Add the central anniversary headline copy.
+- Add optional celebration text for the post-click reveal.
+- Keep it content-driven and safe to omit.
+
+Quality checks:
+- Button copy and celebratory message remain editable in one place.
+- Missing celebration content degrades safely.
+
+Logs:
+- `warn` when optional celebration content is missing or malformed.
+
+#### Step 64: Celebration animation utilities
+
+Responsibility:
+Fireworks and confetti launch logic only.
+
+Files:
+- `src/lib/celebration.ts`
+
+Work:
+- Set up the firework burst orchestration.
+- Layer in a light confetti accent.
+- Respect reduced motion where possible.
+
+Quality checks:
+- Animation logic stays separate from rendering.
+- No DOM coupling outside the utility or hook boundary.
+
+Logs:
+- `[celebration] launched`
+- `[celebration] reduced motion fallback`
+
+#### Step 65: Celebration centerpiece
+
+Responsibility:
+Large center-screen anniversary button only.
+
+Files:
+- `src/components/celebration/AnniversaryHero.tsx`
+- `src/components/celebration/CelebrationLayer.tsx`
+
+Work:
+- Render a bold `Happy Anniversary Aru` centerpiece in the middle of the desktop.
+- Trigger the celebration animation on click.
+- Show a soft romantic end frame after the bursts.
+
+Quality checks:
+- The button feels like the clear focal point of the desktop.
+- Animation is extravagant but still elegant and on-theme.
+
+Logs:
+- `[celebration] hero clicked`
+
+#### Step 66: Desktop integration
+
+Responsibility:
+Place the centerpiece into the authenticated desktop layout only.
+
+Files:
+- `src/components/desktop/Desktop.tsx`
+
+Work:
+- Add the anniversary hero to the desktop center.
+- Keep it above the background and widgets, but below active windows.
+
+Quality checks:
+- The desktop now has a clear visual centerpiece.
+- Existing windows and icons remain usable.
+
+Logs:
+- No direct logs needed.
+
+### Phase 19: Bloom Celebration Refinement
+
+#### Step 67: Flower-first celebration animation
+
+Responsibility:
+Centerpiece bloom animation only.
+
+Files:
+- `src/components/celebration/FlowerBloom.tsx`
+- `src/components/celebration/CelebrationLayer.tsx`
+- `src/lib/celebration.ts`
+
+Work:
+- Replace the fireworks-led reveal with a large blooming flower as the primary animation.
+- Keep soft sparks behind the bloom and gold-rose confetti as accents.
+- Preserve the romantic final line after the bloom settles.
+
+Quality checks:
+- The bloom feels dramatic and elegant rather than busy.
+- The animation remains responsive and respects reduced motion.
+
+Logs:
+- `[celebration] bloom started`
+- `[celebration] bloom completed`
+
 ## Logging Standard
 
 Use logs for meaningful user actions and state changes.
